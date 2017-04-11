@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSearchApplication", "GoogleSearchApplication\GoogleSearchApplication.csproj", "{ED933157-D1E7-464B-A430-1AC92D120373}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSearch.Web", "GoogleSearch.Web\GoogleSearch.Web.csproj", "{9C4787B1-6232-44A9-A956-29F7419DED76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSearch.Business", "GoogleSearch.Business\GoogleSearch.Business.csproj", "{5F589984-7362-4F38-BE63-714AA4BF1392}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ED933157-D1E7-464B-A430-1AC92D120373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED933157-D1E7-464B-A430-1AC92D120373}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED933157-D1E7-464B-A430-1AC92D120373}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED933157-D1E7-464B-A430-1AC92D120373}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9C4787B1-6232-44A9-A956-29F7419DED76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9C4787B1-6232-44A9-A956-29F7419DED76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C4787B1-6232-44A9-A956-29F7419DED76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C4787B1-6232-44A9-A956-29F7419DED76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F589984-7362-4F38-BE63-714AA4BF1392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F589984-7362-4F38-BE63-714AA4BF1392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F589984-7362-4F38-BE63-714AA4BF1392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F589984-7362-4F38-BE63-714AA4BF1392}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

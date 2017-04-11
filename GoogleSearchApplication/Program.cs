@@ -40,12 +40,11 @@ namespace GoogleSearchApplication
         {
             const string startsWith = "<h3 class=\"r\">";
             const string endsWith = "</h3>";
-
+            var pattern = string.Format("({0})(.*?)({1})", startsWith, endsWith);
 
             const string infotrack = "www.infotrack.com.au";
 
-            var reg = new Regex(string.Format("({0})(.*?)({1})", startsWith, endsWith));
-            var matchCollection = reg.Matches(response);
+            var matchCollection = Regex.Matches(response, pattern);
             int i = 0;
             foreach (Match match in matchCollection)
             {

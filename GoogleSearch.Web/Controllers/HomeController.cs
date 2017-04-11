@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
+using GoogleSearch.Business;
 
 namespace GoogleSearch.Web.Controllers
 {
@@ -13,18 +15,13 @@ namespace GoogleSearch.Web.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public JsonResult GetIndexes(string url, string keywords)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var testCollection = new List<string>();
+            var results = new GoogleSearchService(url, keywords).GetSearchIndexes(testCollection);
+            return Json(new
+            {results = string.Join(", ", results), all = string.Join(Environment.NewLine, testCollection)});
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }

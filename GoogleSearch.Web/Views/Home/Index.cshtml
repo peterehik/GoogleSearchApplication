@@ -1,31 +1,76 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<style>
+    input[type=text], textarea {
+        width: 300px;
+    }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    label {
+        width: 150px;
+        display: inline-block;
+    }
+    .searchResults h3 {
+        font-size: 15px;
+    }
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    .makeRed a {
+        color: red;
+    }
+</style>
+
+<div style="margin-top: 20px;">
+    <p><label>Enter Url:</label> <input type="text" data-bind="value: url" /></p>
+    <p><label>Enter Key words:</label> <input type="text" data-bind="value: keywords" /></p>
+    <p><label>&nbsp;</label><button id="submitBtn" data-bind="click: makeAjaxCall">Search</button></p>
 </div>
+<div>
+    <label>Results: </label>
+    <strong data-bind="text: results"></strong>
+</div>
+<div style="margin-top:20px;" class="searchResults" data-bind="html: all">
+</div>
+<script type="text/javascript">
+    
+    ko.validation.rules.pattern.message = 'Invalid.';
+    var AppViewModel = function(){
+        this.url = ko.observable("https://www.infotrack.com.au").extend({required: true});
+        this.keywords = ko.observable("Online Title Search").extend({required: true});
+        this.results = ko.observable("");
+        this.all = ko.observable("");
+        this.makeAjaxCall = function () {
+            if (this.errors().length > 0) {
+                alert('Please check your submission.');
+                this.errors().showAllMessages();
+                return;
+            }
+            var self = this;
+            $.ajax('@Url.Action("GetIndexes")', {
+                data: { url: self.url, keywords: self.keywords },
+                beforeSend: function() {
+                    $("#submitBtn").prop('disabled', true).text("Searching...");
+                },
+                complete: function() { $("#submitBtn").prop("disabled", false).text("Search"); },
+                success: function (data) {
+                    if(data.results){
+                        self.results(data.results);
+                    }
+                    else {
+                        self.results("No matching URL.");
+                    }
+                    self.all("<div class='header'>Top 100 Google search results for keywords.</div>" + data.all);
+                },
+                type: 'post',
+            });
+        };
+        this.errors = ko.validation.group(this);
+        
+    };
+
+    ko.applyBindings(new AppViewModel());
+    
+    $(".searchResults").on("click", "a", function (e) {
+        e.preventDefault();
+    });
+
+</script>
